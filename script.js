@@ -19,9 +19,11 @@ let timerInterval;
 let elapsedTime = 0;
 
 const timer = document.getElementById('timer');
+const board = document.getElementById('game-board');
 
-setupBoard();
-
+if (board){
+    setupBoard();
+}
 
 function createCard(card, type) {
     const cardElement = document.createElement('div');
@@ -82,8 +84,8 @@ function removeCards(card1, card2) {
 
     if (matchedCards === cards.length) {
         stopTimer();
-        alert('You won!');
-    }
+        window.location = 'gameover.html';
+    }   
 }
 
 function unmatchCards(card1, card2) {
@@ -108,11 +110,6 @@ function playVoice(text) {
     window.speechSynthesis.speak(msg);
 }
 
-// function playVoice(file) {
-//     const audio = new Audio(file);
-//     audio.play();
-// }
-
 
 function startTimer() {
     timerInterval = setInterval(() => {
@@ -123,6 +120,7 @@ function startTimer() {
 
 function stopTimer() {
     clearInterval(timerInterval);
+    localStorage.setItem('timerValue', timer.textContent);
 }
 
 function resetTimer() {
@@ -137,6 +135,11 @@ function formatTime(seconds) {
     return `${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
 }
 
+function convertToSeconds(timeString) {
+    const [minutes, seconds] = timeString.split(':').map(Number);
+    const totalSeconds = (minutes * 60) + seconds;
+    return totalSeconds;
+}
 
 function OptionsAlert(){
     Swal.fire({
@@ -151,5 +154,36 @@ function OptionsAlert(){
         showCloseButton: true,
         showConfirmButton: false,
     });
+}
+
+function playMusic() {
+    const music = document.getElementById('music');
+    const iconPlay = document.getElementById('icon-play');
+    const iconMute = document.getElementById('icon-mute');
+
+    console.log(music.paused)
+    if (music.paused) {
+        music.play();
+        iconPlay.classList.remove('hidden');
+        iconMute.classList.add('hidden');
+    } else {
+        music.pause();
+        iconPlay.classList.add('hidden');
+        iconMute.classList.remove('hidden');
+    }
+}
+
+const bestTime = document.getElementById('bestTime');
+
+if (bestTime){
+    displayTimerValue();
+}
+
+function displayTimerValue() {
+    let timerValue = localStorage.getItem('timerValue');
+    if (timerValue) {
+        timer.textContent = timerValue;
+        bestTime.textContent = convertToSeconds(timerValue);
+    }
 }
 

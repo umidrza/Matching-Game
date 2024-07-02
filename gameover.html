@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Over</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">Match</div>
+        <div class="timer" id="timer">00:00</div>
+        <div class="nav-buttons">
+            <button class="music-button" onclick="playMusic()">
+                <audio id="music" src="media/voice1.mp3"></audio>
+                <i class="fa-solid fa-volume-high hidden" id="icon-play"></i>
+                <i class="fa-solid fa-volume-xmark" id="icon-mute"></i>
+            </button>
+            <button onclick="OptionsAlert()">Options</button>
+            <a href="#"><button class="close-button"><i class="fa-solid fa-xmark"></i></button></a>
+        </div>
+    </nav>
+    <div id="gameover">  
+        <div class="container">
+            <div class="congrats">
+                <div>
+                    <h2>Nice Work! Can you <br>match even faster?</h2>
+                    <p>Try and beat your best time of <span id="bestTime"></span> seconds</p>
+                </div>
+                <img class="congrats-img" src="media/congrats.png" alt="">
+            </div>
+            <div>
+                <h3>The top 5</h3>
+                <div class="scores">
+                    <div class="score">
+                        <div class="user-detail">
+                            <p>1</p>
+                            <img class="user-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmCy16nhIbV3pI1qLYHMJKwbH2458oiC9EmA&s" alt="">
+                            <p class="user-name">Olga_Cotey</p>
+                        </div>
+                        <div>
+                            <p class="user-score">52.3 seconds</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="fixed-footer">
+        <button class="sharescore-btn">Share your score</button>
+        <a href="index.html"><button class="playagain-btn">Play again</button></a>
+    </div>
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+</html>
